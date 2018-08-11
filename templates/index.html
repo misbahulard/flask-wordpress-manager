@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="display-4 text-center title-index"><strong>Wordpress</strong> Manager</h1>
+
+<hr class="pb-3">
+
+<h3>Wordpress vhost <span class="badge badge-secondary">{{ vhost | length }}</span></h3>
+<div class="accordion" id="accordion">
+    <div class="card">
+      <div class="card-header" id="vhost">
+        <h5 class="mb-0">
+          <button class="btn" type="button" data-toggle="collapse" data-target="#collapseVhost" aria-expanded="true" aria-controls="collapseVhost">
+            Vhost list
+          </button>
+        </h5>
+      </div>
+      <div id="collapseVhost" class="collapse" aria-labelledby="vhost" data-parent="#accordion">
+        <div class="card-body">
+          <div class="list-group">
+            {% for v in vhost %}
+              {% if v == 'wpuser' %}
+                <div class="row row-vhost">
+                  <div class="col-11 d-flex align-items-center">
+                    <a href="http://pcxma.com" target="_blank" class="text-uppercase">main</a>
+                  </div>
+                  <div class="col-1">
+                    <a href="/delete?vhost=wpuser" class="d-block btn btn-danger disabled">X</a>
+                  </div>
+                </div>
+              {% else %}
+                <div class="row row-vhost">
+                  <div class="col-11 d-flex align-items-center">
+                    <a href="http://{{v}}.pcxma.com" target="_blank" class="text-uppercase">{{v}}</a>
+                  </div>
+                  <div class="col-1">
+                    <a href="/delete?vhost={{v}}" class="d-block btn btn-danger">X</a>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          
+        </div>
+      </div>
+  </div>  
+</div>
+
+<hr class="pb-3">
+
+<h3>Create new Wordpress domain</h3>
+<form action="create" method="post">
+  <div class="form-group">
+    <label for="username">Username</label>
+    {{form.username(class_="form-control form-control shadow-sm")}}
+    <small id="usernameHelp" class="form-text text-muted">domain name will be same with username.</small>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    {{form.password(class_="form-control form-control shadow-sm")}}
+  </div>
+  <button type="submit" class="btn btn-primary shadow-sm">Generate</button>
+</form>
+
+{% endblock %}
+
+{% block addonscript %}
+
+<script>
+	$("#keyword").focus();
+</script>
+
+{% endblock %}

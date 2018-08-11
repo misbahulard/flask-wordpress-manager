@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="display-4 text-center title-index"><strong>Wordpress</strong> Manager</h1>
+
+<hr class="pb-3">
+
+<a href="/" class="btn btn-success mb-3">&laquo; Back</a>
+
+<h3>Console output</h3>
+
+<div class="alert alert-info" role="alert">
+<!-- log output -->
+<pre>
+{% for o in output %}
+{{ o }}
+{% endfor %}
+</pre>
+<!-- end log output -->
+{% if method == 'create' %}
+  <h5>Configure the Wordpress: <a href="http://pcxma.com/{{username}}" target="_blank">CLICK HERE</a></h5>
+{% else %}
+  <h5>Delete successful</h5>
+{% endif %}
+</div>
+
+
+{% endblock %}
+
+{% block addonscript %}
+
+<script>
+	$("#keyword").focus();
+</script>
+
+{% endblock %}
