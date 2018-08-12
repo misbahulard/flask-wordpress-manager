@@ -13,6 +13,7 @@ def index():
     # inisialisasi
     form = CreateForm()
     output = []
+    vhost = []
     USER = "root"
     HOST = "pcxma.com"
 
@@ -33,6 +34,7 @@ def index():
         vhost.insert(0, 'wpuser')
     else:
         output.append("ERROR: " + result[1])
+        vhost.append('wpuser')
 
 
     return render_template("index.html", form = form, output = output, vhost = vhost)
